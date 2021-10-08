@@ -146,8 +146,9 @@ class AgreementHandler(RuleHandler):
 # (Про 14 и 15 пункты уточнить, что они попадают сюда)
 class TagOnlyHandler(RuleHandler):
     ## прописать все соотв. тэги
-    lvl1_tags = ['Voice', 'Spelling', 'Capitalisation', 'Noun_number']
-    lvl2_tags = ['Comparative_adj', 'Superlative_adj', # degrees of adjectives/adverbs
+    lvl1_tags = ['Spelling', 'Capitalisation', 'Noun_number']
+    lvl2_tags = ['Voice',
+    'Comparative_adj', 'Superlative_adj', # degrees of adjectives/adverbs
     'Comparative_adv', 'Superlative_adv',
     'Modals', 'Tense_form',
     'Infinitive_constr','Gerund_phrase',
