@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <div class="px-4 py-5 my-5 text-center">
+                <h1 class="display-5 fw-bold">Correct-an-Error Question Level Classifier</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">This a demo of difficulty classifier for <i>Correct-an-Error fill-the-gap</i> questions from "Predicting the difficulty level of learner-corpus-based grammar questions"</p>
+                    <p class="mb-4">To use this demo please select a CSV or Excel (XLSX) spreadsheet on your computer with the following table structure:</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sentence</th>
+                                <!-- <th scope="col">Error span</th> -->
+                                <th scope="col">Right answer</th>
+                                <th scope="col">Error type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>However, during four years people are going to buy more eBooks than real ones, but printed books &lt;b&gt;would&lt;/b&gt; be still quite popular.</td>
+                                <!-- <td>would</td> -->
+                                <td>will</td>
+                                <td>Tense_choice</td>
+                            </tr>
+                            <tr>
+                                <td> There are a lot of factors which &lt;b&gt;influence on&lt;/b&gt; a teenager's behaviour.</td>
+                                <!-- <td>influence on</td> -->
+                                <td>influence</td>
+                                <td>Verb_pattern</td>
+                            </tr>
+                            <tr>
+                                <td> As for disadvantages, &lt;b&gt;international corporations moving to poor countries&lt;/b&gt; will lead to the process of urbanization and, thus, will cause environmental pollution.</td>
+                                <!-- <td>international corporations moving to poor countries</td> -->
+                                <td>moving international corporations to poor countries</td>
+                                <td>Word_order</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form action="/" method="post" enctype="multipart/form-data">
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <input type="file" name="dataFile" class="btn btn-outline-secondary btn-lg px-4 gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg px-4">Estimate level</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

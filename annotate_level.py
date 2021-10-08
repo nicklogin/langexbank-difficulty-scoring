@@ -3,13 +3,13 @@ import numpy as np
 import spacy
 from tqdm import tqdm
 
-import base
+from handlers import RuleHandler
 
 MODEL = spacy.load("en_core_web_sm")
 
 def annotate_level(questions_df: pd.DataFrame):
     handler_results = []
-    for handler_cls in base.RuleHandler.__subclasses__():
+    for handler_cls in RuleHandler.__subclasses__():
         handler = handler_cls(MODEL)
         
         tqdm.pandas()

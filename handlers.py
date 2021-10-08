@@ -8,6 +8,11 @@ CLAUSAL_DEP_TAGS = [
     'advcl', 'acl'
 ]
 
+DEP_CLAUSE_DEP_TAGS = [
+    'csubj', 'ccomp', 'xcomp',
+    'advcl', 'acl'
+]
+
 class RuleHandler(ABC):
     def __init__(self, lang_model):
         self.model = lang_model
@@ -83,6 +88,11 @@ class AgreementHandler(RuleHandler):
 
         if subject:
             subject = subject[0]
+
+            ## Latest improvement
+            if subject.dep_ == "csubj":
+                return 3
+            ## End of latest improvement
 
             # Если подлежащее - collective noun, уровень 3 (в стандарте UD это есть, но парсер SpaCy при мне такого не обнаруживал)
             if "Number=Coll" in subject.morph:
@@ -259,7 +269,7 @@ class TenseChoiceHandler(RuleHandler):
         clause_count = 0
 
         for token in corr_sent_parsed:
-            if token.dep_ in CLAUSAL_DEP_TAGS:
+            if token.dep_ in DEP_CLAUSE_DEP_TAGS:
                 clause_count += 1
             if clause_count > 2:
                 return 3
