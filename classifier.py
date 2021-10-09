@@ -9,7 +9,6 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.manifold import TSNE
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import LabelEncoder
-from gensim.models import KeyedVectors
 from tqdm import tqdm
 from math import ceil
 
@@ -18,9 +17,6 @@ import os
 import html
 import pandas as pd
 import numpy as np
-
-import nltk
-from nltk import word_tokenize
 
 def clean_question_text(qtext):
   quest_text = re.sub('<.*?>','',qtext)

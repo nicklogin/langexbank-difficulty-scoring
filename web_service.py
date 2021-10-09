@@ -6,11 +6,18 @@ from dataframe_processor import process_df
 
 import pandas as pd
 
-from secret_codes import SECRET_KEY, ACCESS_CODE
+#from secret_codes import SECRET_KEY, ACCESS_CODE
 
-INPUT_FOLDER = "input_files"
-OUTPUT_FOLDER = "output_files"
-LOGIN_REQUIRED = True
+INPUT_FOLDER = os.environ.get("CLF_INPUT_FOLDER", default="input_files")
+OUTPUT_FOLDER = os.environ.get("CLF_OUTPUT_FOLDER", default="output_files")
+LOGIN_REQUIRED = int(os.environ.get("CLF_LOGIN_REQUIRED", default=False))
+INDICATE_HANDLERS = int(os.environ.get("CLF_INDICATE_HANDLERS", default=True))
+SECRET_KEY = os.environ.get("CLF_SECRET_KEY", default="secretkey")
+ACCESS_CODE = os.environ.get("CLF_ACCESS_CODE", default="accesscode")
+
+for folder in (INPUT_FOLDER, OUTPUT_FOLDER):
+    if not os.path.exists(folder):
+        os.mkdir(folder)
 
 app = Flask(__name__, template_folder="templates")
 app.config["UPLOAD_FOLDER"] = INPUT_FOLDER
@@ -44,11 +51,11 @@ def index():
 
                     if extension == '.xlsx':
                         df = pd.read_excel(inp_filepath, engine="openpyxl")
-                        df = process_df(df)
+                        df = process_df(df, INDICATE_HANDLERS)
                         df.to_excel(out_filepath, engine="openpyxl")
                     elif extension == '.csv':
                         df = pd.read_csv(inp_filepath)
-                        df = process_df(df)
+                        df = process_df(df, INDICATE_HANDLERS)
                         df.to_csv(out_filepath)
 
                     attachment_name = filename+'_processed'+extension
